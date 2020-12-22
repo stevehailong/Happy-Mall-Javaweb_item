@@ -1,0 +1,11 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/static/
+    suffix: .html
+  datasource:
+    url: jdbc:mysql://localhost:3306/shopping?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 77549252
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  type-enums-package: com.xiaole.shopping.Enums   #配置枚举类包

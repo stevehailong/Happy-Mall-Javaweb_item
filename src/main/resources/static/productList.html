@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品列表</title>
+    <link rel="shortcut icon" href="/favicon1.ico">
+    <link rel="bookmark" href="/favicon1.ico">
+    <script type="text/javascript" src="/js/jquery-1.11.1.min_044d0927.js"></script>
+    <th:block th:include="common.html :: source"></th:block>
+</head>
+<body>
+
+<th:block th:include="common.html :: header"></th:block>
+<th:block th:include="common.html :: category"></th:block>
+
+<div class="i_bg">
+    <div class="content mar_20">
+        <div id="favoriteList"></div>
+        <div class="l_list">
+            <div class="list_c">
+                <ul class="cate_list">
+                    <li th:each="product:${productList}">
+                        <div class="name">
+                            <a th:href="'/product/findById/'+${product.id}" th:text="${product.name}">商品</a>
+                        </div>
+                        <div class="price">
+                            <font>￥<span th:text="${product.price}">100</span></font> &nbsp;
+                        </div>
+                        <div class="img">
+                            <a th:href="'/product/findById/'+${product.id}">
+                                <img th:src="'/images/'+${product.fileName}" width="185"
+                                     height="155"/>
+                            </a>
+                        </div>
+                        <div class="carbg">
+                            <input type="hidden" id="stock" th:value="${product.stock}">
+                            <a href="javascript:void(0);" class="ss">收藏</a>
+                            <a th:onclick="'addCart('+${product.id}+','+${product.price}+')'" class="j_car">加入购物车</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //添加购物车
+    function addCart(productId, price) {
+        let stock = $("#stock").val();
+        console.log(stock);
+        if (stock <= 1) {
+            alert("库存不足，暂时无法购买！");
+            return false;
+        }
+        window.location.href = "/cart/add/" + productId + "/" + price + "/1";
+    }
+</script>
+<th:block th:include="common.html :: footer"></th:block>
+<th:block th:include="common.html :: permit"></th:block>
+</body>
+</html>
